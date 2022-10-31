@@ -19,12 +19,15 @@ export default function Calculate({ product, addItem, alterQuantity, subtractIte
     const ChoiceQuantityProduct = () => (
         <>
             <Grid item xs={4} sm={4} md={4}>
-                <IconButton
-                    disabled={!!product.dependsOn}
-                    onClick={() => subtractItem({ ...product, index, quantityCameras })}
-                >
-                    <AiOutlineMinusCircle />
-                </IconButton>
+                {
+                    !product.dependsOn ?
+                        <IconButton
+                            onClick={() => subtractItem({ ...product, index, quantityCameras })}
+                        >
+                            <AiOutlineMinusCircle />
+                        </IconButton> : false
+                }
+
             </Grid>
 
             <Grid item xs={4} sm={4} md={4}>
@@ -32,12 +35,17 @@ export default function Calculate({ product, addItem, alterQuantity, subtractIte
             </Grid>
 
             <Grid item xs={4} sm={4} md={4}>
-                <IconButton
-                    disabled={!!product.dependsOn}
-                    onClick={() => addItem({ ...product, index, quantityCameras })}
-                >
-                    <AiOutlinePlusCircle />
-                </IconButton>
+                {
+                    !product.dependsOn ?
+                        <IconButton
+                            disabled={!!product.dependsOn}
+                            onClick={() => addItem({ ...product, index, quantityCameras })}
+                        >
+                            <AiOutlinePlusCircle />
+                        </IconButton> : false
+                }
+
+
             </Grid>
         </>
     );

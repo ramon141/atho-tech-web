@@ -149,25 +149,29 @@ export default function Calculate() {
                     Orçamento
                 </Typography>
 
-                <Grid container>
+                <Grid container justifyContent='center' spacing={2}>
                     {
                         products.map((product, index) => (
-                            <Item
-                                alterQuantity={alterQuantity}
-                                quantityCameras={products[5].quantity}
-                                addItem={addItem}
-                                subtractItem={subtractItem}
-                                key={product.id}
-                                product={product}
-                                setProducts={setProducts}
-                                index={index}
-                            />
+                            <Grid item xs={12} sm={12} md={6} lg={4}>
+                                <Item
+                                    alterQuantity={alterQuantity}
+                                    quantityCameras={products[5].quantity}
+                                    addItem={addItem}
+                                    subtractItem={subtractItem}
+                                    key={product.id}
+                                    product={product}
+                                    setProducts={setProducts}
+                                    index={index}
+                                />
+                            </Grid>
                         ))
                     }
 
                     <Grid item>
                         <Button
+                            variant='outlined'
                             onClick={handleClickOpen}
+                            style={{ backgroundColor: '#1976D2', color: 'white', borderColor: 'rgba(0,0,0,0.50)' }}
                         >
                             Enviar Orçamento
                         </Button>
