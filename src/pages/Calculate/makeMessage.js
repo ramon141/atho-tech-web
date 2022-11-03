@@ -1,7 +1,10 @@
 import { getActiveConfigurations } from "./calcs";
 
-export const makeMessage = (userName, products, services) => {
+export const makeMessage = (userName, products, services, budgetId) => {
   let message =
+    `Orçamento nº ${budgetId}\n\n`;
+
+  message +=
     `Olá ${userName.trim()}, aqui seu orçamento realizado na empresa Atho Tech\n\nItens:\n`;
 
   let total = 0;

@@ -6,7 +6,6 @@ import Item from './Item';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { makeMessage } from './makeMessage';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -24,6 +23,8 @@ const classes = {
     }
 }
 
+let budgetId = 0;
+
 export default function Calculate() {
 
     const location = useLocation();
@@ -38,6 +39,16 @@ export default function Calculate() {
 
     const handleClickOpen = () => setOpenDialog(true);
     const handleClose = () => setOpenDialog(false);
+
+    const confirmBudget = () => {
+        const data = {
+            "quantity_budget": budgetId + 1
+        };
+
+        budgetId++;
+
+        api.patch('/budgets', data);
+    }
 
     useEffect(() => {
         api.get('/products?filter={"include":["configurations"]}').then((response) => {
@@ -73,6 +84,12 @@ export default function Calculate() {
 
         api.get('/dependencies?filter={"include":["configuration"]}').then((response) => {
             setDependencies(response.data);
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        api.get('/budgets/1').then((response) => {
+            budgetId = response.data.quantity_budget;
         }).catch((error) => {
             console.log(error);
         });
@@ -182,7 +199,8 @@ export default function Calculate() {
                                     target='_blank'
                                     style={{ backgroundColor: "#1976D2", color: 'white' }}
                                     variant='outlined'
-                                    href={`https://wa.me/55${clientNumber}?text=${makeMessage(username, products, services)}`}
+                                    onClick={() => confirmBudget()}
+                                    href={`https://wa.me/55${clientNumber}?text=${makeMessage(username, products, services, budgetId)}`}
                                 >
                                     Confirmar
                                 </Button>

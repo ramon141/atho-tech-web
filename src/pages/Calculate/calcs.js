@@ -10,6 +10,8 @@ function verifyDependencies(product, products, dependecies) {
 
                 products[dependency.configuration.productsId].quantity = Math.ceil(quantityProduct * multiplier);
 
+                products = verifyDependencies(products[dependency.configuration.productsId], products, dependecies);
+
             } else if (dependency.type_dependency === 'change_configuration') {
                 const limits = dependency.condition_quantity;
                 if (quantityProduct >= limits[0] && limits[1] >= quantityProduct) {
