@@ -11,11 +11,17 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { makeMessage } from './makeMessage';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ItemService from './ItemService';
+import InputMask from '../../components/InputMask';
 
 const classes = {
     root: { margin: 20 },
     title: { fontWeight: 600 },
-    gridRoot: { height: 400 }
+    gridRoot: { height: 400 },
+    backButton: {
+        border: '1px solid rgba(0,0,0,0.23)',
+        backgroundColor: "#CFCFCF",
+        color: 'black'
+    }
 }
 
 export default function Calculate() {
@@ -127,8 +133,8 @@ export default function Calculate() {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">
-                        {"Enviando Orçamento"}
+                    <DialogTitle style={{ textAlign: 'center' }} id="alert-dialog-title">
+                        Enviando Orçamento
                     </DialogTitle>
 
                     <DialogContent>
@@ -144,10 +150,12 @@ export default function Calculate() {
                                 />
                             </Grid>
                             <Grid item sm={12} md={12}>
-                                <TextField
+                                <InputMask
+                                    mask="(99) 99999-9999"
+                                    onlyNumbers={true}
                                     label='Digite o número do cliente'
                                     value={clientNumber}
-                                    onChange={(e) => setClientNumber(e.target.value)}
+                                    setValue={setClientNumber}
                                     size='small'
                                     fullWidth
                                 />
@@ -158,11 +166,18 @@ export default function Calculate() {
                     <DialogActions style={{ justifyContent: "center" }}>
                         <Grid container spacing={2} justifyContent='center'>
                             <Grid item>
-                                <Button variant='outlined' onClick={handleClose}>Voltar</Button>
+                                <Button
+                                    style={classes.backButton}
+                                    variant='outlined'
+                                    onClick={handleClose}
+                                >
+                                    Voltar
+                                </Button>
                             </Grid>
                             <Grid item>
                                 <Button
                                     target='_blank'
+                                    style={{ backgroundColor: "#1976D2", color: 'white' }}
                                     variant='outlined'
                                     href={`https://wa.me/55${clientNumber}?text=${makeMessage(username, products, services)}`}
                                 >
