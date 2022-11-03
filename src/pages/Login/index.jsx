@@ -32,7 +32,7 @@ export default function Login() {
 
         api.post('/login', credentials).then((response) => {
             addTokenInEnvVariables(response.data.token);
-            navigate('/calculate');
+            navigate('/choice-kits');
         }).catch((error) => {
             alert('Houve um erro ao tentar acessar o sistema, confirme suas credenciais');
         })

@@ -14,33 +14,9 @@ const classes = {
     gridRoot: { height: 400 }
 }
 
-export default function Item({ product, addItem, subtractItem }) {
+export default function ItemService({ service, quantityCameras }) {
 
-    const activeConfigurations = getActiveConfigurations(product);
-
-    const ChoiceQuantityProduct = () => (
-        <>
-            <Grid item xs={4} sm={4} md={4}>
-                <IconButton
-                    onClick={() => subtractItem(product)}
-                >
-                    <AiOutlineMinusCircle />
-                </IconButton>
-            </Grid>
-
-            <Grid item xs={4} sm={4} md={4}>
-                {product.quantity || 1}
-            </Grid>
-
-            <Grid item xs={4} sm={4} md={4}>
-                <IconButton
-                    onClick={() => addItem(product)}
-                >
-                    <AiOutlinePlusCircle />
-                </IconButton>
-            </Grid>
-        </>
-    );
+    const quantityCamerasLocal = service.id === 1 ? quantityCameras : 1;
 
     return (
         <Grid
@@ -51,9 +27,7 @@ export default function Item({ product, addItem, subtractItem }) {
             spacing={1}
         >
             <Grid item xs={12} sm={12} md={12}>
-                {product.description}
-                {activeConfigurations.description.length > 1 ? ' - ' : ''}
-                {activeConfigurations.description}
+                {service.description}
             </Grid>
 
             <Grid
@@ -66,14 +40,12 @@ export default function Item({ product, addItem, subtractItem }) {
                 justifyContent='center'
                 alignItems='center'
             >
-                <ChoiceQuantityProduct />
             </Grid>
 
             <Grid item xs={6} sm={6} md={6} style={{ textAlign: 'center' }}>
                 Valor:
                 {
-                    (activeConfigurations.value * product.quantity)
-                        .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+                    (service.value * quantityCamerasLocal).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
                 }
             </Grid>
 

@@ -4,23 +4,34 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import { useNavigate } from 'react-router-dom';
 
-export default function ListItems({ children, isOpen, onClose }) {
-    return (<List>
-        <Divider />
+export default function ListItems() {
 
-        <ListItem>
-            <ListItemButton>
-                <ListItemText primary={'Calculadora'} />
-            </ListItemButton>
-        </ListItem>
+    const navigate = useNavigate();
 
-        <ListItem>
-            <ListItemButton>
-                <ListItemText primary={'Cadastro de Vendedores'} />
-            </ListItemButton>
-        </ListItem>
+    return (
+        <List>
+            <Divider />
 
-    </List>
+            <ListItem>
+                <ListItemButton onClick={() => navigate('/choice-kits')}>
+                    <ListItemText primary={'Escolher Kit'} />
+                </ListItemButton>
+            </ListItem>
+
+            <ListItem>
+                <ListItemButton onClick={() => navigate('/calculate')}>
+                    <ListItemText primary={'Calculadora'} />
+                </ListItemButton>
+            </ListItem>
+
+            <ListItem>
+                <ListItemButton onClick={() => navigate('/register-seller')}>
+                    <ListItemText primary={'Cadastro de Vendedores'} />
+                </ListItemButton>
+            </ListItem>
+
+        </List>
     );
 }

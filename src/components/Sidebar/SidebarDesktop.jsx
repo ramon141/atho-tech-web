@@ -27,7 +27,7 @@ export default function ClippedDrawer({ children }) {
                 </Box>
             </Drawer>
 
-            <Box component="main" sx={{ marginTop: 9 }}>
+            <Box component="main" sx={{ marginTop: 9, width: '100%' }}>
                 {children}
             </Box>
         </Box>

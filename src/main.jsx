@@ -12,14 +12,15 @@ import Sidebar from './components/Sidebar';
 import './index.css';
 import Footer from './components/Footer';
 import AccessDenied from './pages/AccessDenied';
+import ChoiceKits from './pages/ChoiceKits/';
 
 const PrivateRoute = ({ element: Element }, props) => {
   return (
     <>
       <Sidebar>
         <Element {...props} />
+        <Footer />
       </Sidebar>
-      <Footer />
     </>
   )
 }
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: "/access-denied",
     element: <AccessDenied />
+  },
+  {
+    path: "/choice-kits",
+    element: <PrivateRoute element={ChoiceKits} />
   }
 ]);
 
