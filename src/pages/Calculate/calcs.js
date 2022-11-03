@@ -8,7 +8,8 @@ function verifyDependencies(product, products, dependecies) {
             if (dependency.type_dependency === 'change_quantity') {
                 const multiplier = dependency.multiplier;
 
-                products[dependency.configuration.productsId].quantity = (quantityProduct * multiplier);
+                products[dependency.configuration.productsId].quantity = Math.ceil(quantityProduct * multiplier);
+
             } else if (dependency.type_dependency === 'change_configuration') {
                 const limits = dependency.condition_quantity;
                 if (quantityProduct >= limits[0] && limits[1] >= quantityProduct) {
@@ -67,7 +68,6 @@ export const getTotal = (products, services) => {
         const product = products[key];
         total += (product.quantity * getActiveConfigurations(product).value);
     })
-    console.log(total)
 
     total += (products['1']?.quantity || 1) * 90;
     total += 90;

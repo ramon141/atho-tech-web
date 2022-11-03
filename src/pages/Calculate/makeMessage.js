@@ -21,7 +21,7 @@ export const makeMessage = (userName, products, services) => {
   total += (products['1']?.quantity || 1) * 90;
   total += 90;
 
-  message += `\n*Total*: ${total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}`;
+  message += `\n*Total: ${total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}*`;
 
   return window.encodeURIComponent(message);
 };

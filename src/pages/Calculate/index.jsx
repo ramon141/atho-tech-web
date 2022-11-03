@@ -49,9 +49,12 @@ export default function Calculate() {
 
                 let quantity = 1;
                 product.configurations.map((configuration, index) => {
-                    newConfiguration[configuration.id] = { ...configuration, usage: index === 0 }
-                    if (!!kit?.products[configuration.id])
+                    if (!!kit?.products[configuration.id]) {
                         quantity = kit.products[configuration.id].quantity;
+                        newConfiguration[configuration.id] = { ...configuration, usage: true }
+                    } else {
+                        newConfiguration[configuration.id] = { ...configuration, usage: index === 0 }
+                    }
                 });
 
                 newProducts[product.id] = { ...product, configurations: newConfiguration, quantity };
