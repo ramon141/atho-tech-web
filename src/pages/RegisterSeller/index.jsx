@@ -36,10 +36,17 @@ export default function RegisterSeller() {
       role: 'Vendedor'
     }
     api.post('signup', data).then((response) => {
-      alert('Usuário cadastrado com sucesso!')
+      alert('Usuário cadastrado com sucesso!');
+      cleanFields();
     }).catch((error) => {
       alert(error.response.data.error.message);
     })
+  }
+
+  const cleanFields = () => {
+    setEmail('');
+    setUsername('');
+    setPassword('');
   }
 
   return (
@@ -88,6 +95,7 @@ export default function RegisterSeller() {
                 variant='outlined'
                 fullWidth
                 style={classes.buttonClean}
+                onClick={cleanFields}
               >
                 Limpar
               </Button>

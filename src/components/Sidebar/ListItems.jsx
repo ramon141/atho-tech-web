@@ -5,6 +5,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom';
+import {
+    ROLE
+} from '../../services/auth';
 
 export default function ListItems() {
 
@@ -26,11 +29,14 @@ export default function ListItems() {
                 </ListItemButton>
             </ListItem>
 
-            <ListItem>
-                <ListItemButton onClick={() => navigate('/register-seller')}>
-                    <ListItemText primary={'Cadastro de Vendedores'} />
-                </ListItemButton>
-            </ListItem>
+            {
+                ROLE === 'Admin' ?
+                    <ListItem>
+                        <ListItemButton onClick={() => navigate('/register-seller')}>
+                            <ListItemText primary={'Cadastro de Vendedores'} />
+                        </ListItemButton>
+                    </ListItem> : false
+            }
 
         </List>
     );
