@@ -8,9 +8,16 @@ import IconButton from '@mui/material/IconButton';
 import imgIcon from '../../assets/icon.png';
 import { HiMenu as MenuIcon } from 'react-icons/hi';
 import { BiLogOut as LogoutIcon } from 'react-icons/bi';
-import { logout } from '../../services/auth';
+import { Grid } from '@mui/material';
+import {
+    NAME,
+    ROLE,
+    E_MAIL,
+    logout
+} from '../../services/auth';
 
 export default function Header({ showButtonToOpenMenu, openSidebarMobile, ...props }) {
+
     return (
         <AppBar position="static" {...props}>
             <Toolbar style={{ justifyContent: 'space-between' }}>
@@ -31,16 +38,27 @@ export default function Header({ showButtonToOpenMenu, openSidebarMobile, ...pro
                         </Typography>
                 }
 
-                <IconButton
-                    size="large"
-                    edge="end"
-                    color="inherit"
-                    onClick={() => logout()}
-                    aria-label="menu"
-                    sx={{ mr: 2 }}
-                >
-                    <LogoutIcon />
-                </IconButton>
+                <div>
+                    <Grid container spacing={2} alignItems='center'>
+                        <Grid item >
+                            Nome: {NAME}<br />
+                            Permissão: {ROLE}
+                        </Grid>
+
+                        <Grid item>
+                            <IconButton
+                                size="large"
+                                edge="end"
+                                color="inherit"
+                                onClick={() => logout()}
+                                aria-label="menu"
+                                sx={{ mr: 2 }}
+                            >
+                                <LogoutIcon />
+                            </IconButton>
+                        </Grid>
+                    </Grid>
+                </div>
             </Toolbar>
         </AppBar>
     );

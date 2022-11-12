@@ -12,7 +12,8 @@ import Sidebar from './components/Sidebar';
 import './index.css';
 import Footer from './components/Footer';
 import AccessDenied from './pages/AccessDenied';
-import ChoiceKits from './pages/ChoiceKits/';
+import ChoiceKits from './pages/ChoiceKits';
+import RegisterSeller from './pages/RegisterSeller';
 
 const PrivateRoute = ({ element: Element }, props) => {
   return (
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: "/choice-kits",
     element: <PrivateRoute element={ChoiceKits} />
+  },
+  {
+    path: "/register-seller",
+    element: <PrivateRoute element={RegisterSeller} />
   }
 ]);
 

@@ -45,7 +45,8 @@ export default function ItemService({ service, quantityCameras }) {
             <Grid item xs={6} sm={6} md={6} style={{ textAlign: 'center' }}>
                 Valor:
                 {
-                    (service.value * quantityCamerasLocal).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+                    (service.value * quantityCamerasLocal)
+                        .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
                 }
             </Grid>
 

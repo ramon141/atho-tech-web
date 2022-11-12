@@ -20,6 +20,11 @@ const classes = {
         border: '1px solid rgba(0,0,0,0.23)',
         backgroundColor: "#CFCFCF",
         color: 'black'
+    },
+    buttonSubmit: {
+        backgroundColor: '#1976D2',
+        color: 'white',
+        borderColor: 'rgba(0,0,0,0.50)'
     }
 }
 
@@ -138,7 +143,7 @@ export default function Calculate() {
                         <Button
                             variant='outlined'
                             onClick={handleClickOpen}
-                            style={{ backgroundColor: '#1976D2', color: 'white', borderColor: 'rgba(0,0,0,0.50)' }}
+                            style={classes.buttonSubmit}
                         >
                             Enviar Orçamento
                         </Button>
