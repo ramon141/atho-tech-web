@@ -4,7 +4,7 @@ import api from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import imgBackground from '../../assets/background.png';
 import { FaUnlock as LockIcon } from 'react-icons/fa';
-import { login as addTokenInEnvVariables } from '../../services/auth';
+import { login as addEnvVarsFromRequestLogin } from '../../services/auth';
 
 
 const classes = {
@@ -31,7 +31,7 @@ export default function Login() {
         };
 
         api.post('/login', credentials).then((response) => {
-            addTokenInEnvVariables(response.data.token);
+            addEnvVarsFromRequestLogin(response.data);
             navigate('/choice-kits');
         }).catch((error) => {
             alert('Houve um erro ao tentar acessar o sistema, confirme suas credenciais');

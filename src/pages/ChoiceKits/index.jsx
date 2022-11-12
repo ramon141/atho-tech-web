@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 import imgIcon from '../../assets/icon.png';
+import {
+  AiFillCamera as CameraIcon
+} from 'react-icons/ai';
 
 const classes = {
   root: { margin: 20 },
@@ -57,8 +60,18 @@ export default function ChoiceKits() {
           </Grid>
           {
             kits.map((kit) => (
-              <Grid item onClick={() => loadKit(kit)} key={kit.id} style={classes.item}>
-                <img src={imgIcon} style={{ marginTop: 10 }} />
+              <Grid
+                item
+                onClick={() => loadKit(kit)}
+                key={kit.id}
+                style={classes.item}
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                xl={2}
+              >
+                <CameraIcon size={80} />
                 <div>{kit.name}</div>
               </Grid>
             ))
