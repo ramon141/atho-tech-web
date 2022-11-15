@@ -38,6 +38,15 @@ export default function ListItems() {
                     </ListItem> : false
             }
 
+            {
+                ROLE === 'Admin' ?
+                    <ListItem>
+                        <ListItemButton onClick={() => navigate('/products-pricing')}>
+                            <ListItemText primary={'Editar preço dos produtos'} />
+                        </ListItemButton>
+                    </ListItem> : false
+            }
+
         </List>
     );
 }
