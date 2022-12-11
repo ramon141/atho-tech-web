@@ -11,8 +11,16 @@ export const makeMessage = (userName, products, services, budgetId) => {
 
   Object.keys(products).map((key) => {
     const product = products[key];
-    message += `    ${product.quantity || 1}x ${product.description}\n`;
-    total += (product.quantity * getActiveConfigurations(product).value);
+    const activeConfiguration = getActiveConfigurations(product);
+    message += `    ${product.quantity || 1}x ${product.description}`;
+
+    if (activeConfiguration.description.length > 1) {
+      message += ` - ${activeConfiguration.description}\n`;
+    } else {
+      message += '\n';
+    }
+
+    total += (product.quantity * activeConfiguration.value);
   })
 
   message += `\nServiços: \n`;

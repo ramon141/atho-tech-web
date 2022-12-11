@@ -74,6 +74,5 @@ export const getTotal = (products, services) => {
     total += (products['1']?.quantity || 1) * 90;
     total += 90;
 
-
     return total;
 }
