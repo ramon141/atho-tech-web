@@ -26,7 +26,11 @@ export const makeMessage = (userName, products, services, budgetId) => {
   message += `\nServiços: \n`;
   Object.keys(services).map((key) => {
     const service = services[key];
-    message += `    ${service.description}\n`;
+    if (service.description.includes('INSTALAÇÃO')) {
+      message += `    ${(products['1']?.quantity || 1)}x ${service.description}\n`;
+    } else {
+      message += `    1x ${service.description}\n`;
+    }
   })
 
   total += (products['1']?.quantity || 1) * 90;
