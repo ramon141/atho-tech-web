@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken } from "./auth";
 
 const api = axios.create({
-    baseURL: 'https://atho-tech-api2.herokuapp.com/',
+    baseURL: 'https://atho-tech-api.up.railway.app/',
 });
 
 /* Aqui foi utilizado o interceptors do Axios, 
