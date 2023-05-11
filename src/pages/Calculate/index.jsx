@@ -58,6 +58,8 @@ export default function Calculate() {
     useEffect(() => {
         api.get('/products?filter={"include":["configurations"]}').then((response) => {
             let newProducts = {};
+            const configIdKit = Object.keys(kit.products).map(c => parseInt(c));
+            // console.log("e")
 
             //Serve para verificar se alguma configuraçao do kit é igual a essa
             response.data.map((product) => {
@@ -73,7 +75,20 @@ export default function Calculate() {
                     }
                 });
 
-                newProducts[product.id] = { ...product, configurations: newConfiguration, quantity };
+                //Somente devo adicionar em newProducts se caso alguma das configurações dele estiver
+                //no kit
+                let hasInKit = false;
+                const identifiersConfig = Object.keys(newConfiguration).map(c => parseInt(c));
+
+                identifiersConfig.forEach((id) => {
+                    configIdKit.forEach((idKit) => {
+                        if (id === idKit)
+                            hasInKit = true;
+                    })
+                })
+
+                if (hasInKit)
+                    newProducts[product.id] = { ...product, configurations: newConfiguration, quantity };
             });
 
             setProducts(newProducts);

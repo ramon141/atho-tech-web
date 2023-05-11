@@ -68,7 +68,7 @@ export default function RegisterProduct() {
         </Typography>
 
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+          <Grid item xs={12} sm={8} md={8} lg={8} xl={8}>
             <TextField
               label="Nome"
               fullWidth
@@ -78,7 +78,7 @@ export default function RegisterProduct() {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
+          <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
             <TextField
               label="Valor"
               fullWidth

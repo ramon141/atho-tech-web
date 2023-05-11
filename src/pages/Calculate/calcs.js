@@ -1,26 +1,29 @@
 function verifyDependencies(product, products, dependecies) {
     dependecies.forEach((dependency) => {
 
+
         if (product.id === dependency.depends_on) {
             const productDependency = products[dependency.configuration.productsId];
             const quantityProduct = products[product.id].quantity;
+            if (productDependency?.configurations) {
 
-            if (dependency.type_dependency === 'change_quantity') {
-                const multiplier = dependency.multiplier;
+                if (dependency.type_dependency === 'change_quantity') {
+                    const multiplier = dependency.multiplier;
 
-                products[dependency.configuration.productsId].quantity = Math.ceil(quantityProduct * multiplier);
+                    products[dependency.configuration.productsId].quantity = Math.ceil(quantityProduct * multiplier);
 
-                products = verifyDependencies(products[dependency.configuration.productsId], products, dependecies);
+                    products = verifyDependencies(products[dependency.configuration.productsId], products, dependecies);
 
-            } else if (dependency.type_dependency === 'change_configuration') {
-                const limits = dependency.condition_quantity;
-                if (quantityProduct >= limits[0] && limits[1] >= quantityProduct) {
-                    products[dependency.configuration.productsId].configurations =
-                        activeConfiguration(productDependency.configurations, dependency.configurationId);
+                } else if (dependency.type_dependency === 'change_configuration') {
+                    const limits = dependency.condition_quantity;
+                    if (quantityProduct >= limits[0] && limits[1] >= quantityProduct) {
+                        products[dependency.configuration.productsId].configurations =
+                            activeConfiguration(productDependency.configurations, dependency.configurationId);
+                    }
+
+                } else {
+                    console.log('Tipo de dependencia inválida: ' + dependency.type_dependency);
                 }
-
-            } else {
-                console.log('Tipo de dependencia inválida: ' + dependency.type_dependency);
             }
         }
     })
