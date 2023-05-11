@@ -44,6 +44,12 @@ export default function ListItems() {
               <ListItemText primary={"Cadastrar Produto"} />
             </ListItemButton>
           </ListItem>
+
+          <ListItem>
+            <ListItemButton onClick={() => navigate("/rename-products")}>
+              <ListItemText primary={"Editar nome dos Produtos"} />
+            </ListItemButton>
+          </ListItem>
         </>
       ) : (
         false

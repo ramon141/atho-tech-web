@@ -9,6 +9,7 @@ import Sidebar from "./components/Sidebar/index";
 import Footer from "./components/Footer";
 import ProductsPricing from "./pages/ProductsPricing";
 import RegisterProduct from "./pages/RegisterProduct";
+import RenameProducts from "./pages/RenameProducts";
 
 const PrivateRoute = ({ element: Element }, props) => {
   return (
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
   {
     path: "/products-pricing",
     element: <PrivateRoute element={ProductsPricing} />,
+  },
+  {
+    path: "/rename-products",
+    element: <PrivateRoute element={RenameProducts} />,
   },
   {
     path: "/register-product",
