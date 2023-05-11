@@ -5,7 +5,7 @@ export const makeMessage = (userName, products, services, budgetId) => {
     `Orçamento nº ${budgetId}\n\n`;
 
   message +=
-    `Olá ${userName.trim()}, aqui seu orçamento realizado na empresa Atho Tech\n\nItens:\n`;
+    `Olá *${userName.trim()}*, segue sua proposta comercial para instalação do seu sistema de segurança Eletrônica.\n\nItens:\n`;
 
   let total = 0;
 
