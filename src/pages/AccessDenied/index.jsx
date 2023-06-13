@@ -2,7 +2,7 @@ import { Grid, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Calculate() {
+export default function AccessDenied() {
   const navigate = useNavigate();
 
   const goToHome = () => {

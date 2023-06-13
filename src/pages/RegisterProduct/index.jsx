@@ -9,10 +9,6 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import api from "../../services/api";
-import { useNavigate } from "react-router-dom";
-import imgBackground from "../../assets/background.png";
-import { FaUnlock as LockIcon } from "react-icons/fa";
-import { login as addEnvVarsFromRequestLogin } from "../../services/auth";
 
 const classes = {
   root: { margin: 30 },

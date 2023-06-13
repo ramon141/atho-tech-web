@@ -12,7 +12,7 @@ Obs: Lembre-se que os arquivos não necessariamente são exatamente esse, esta i
 
 Dentro arquivo `.env` deverá conter a(s) seguinte(s) variável(is), abaixo de cada variável estará listada os possíveis valores e em quais casos os valores são utilizados.
 
-+ REACT_APP_BASE_API_URL
++ VITE_APP_BASE_API_URL
     + Ambiente de produção - `https://atho-tech-api.up.railway.app/`
     + Ambiente de desenvolvimento - `https://localhost:3001/`
 
