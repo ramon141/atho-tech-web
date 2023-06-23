@@ -11,6 +11,7 @@ import { makeMessage } from './makeMessage';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ItemService from './ItemService';
 import InputMask from '../../components/InputMask';
+import { ID_ENTERPRISE } from '../../services/auth';
 
 const classes = {
     root: { margin: 20 },
@@ -46,70 +47,66 @@ export default function Calculate() {
     const handleClose = () => setOpenDialog(false);
 
     const confirmBudget = () => {
-        const data = {
-            "quantity_budget": budgetId + 1
-        };
-
-        budgetId++;
-
-        api.patch('/budgets', data);
+        api.get(`/enterprises/${ID_ENTERPRISE}/increment_budget`);
     }
 
     useEffect(() => {
-        api.get('/products?filter={"include":["configurations"]}').then((response) => {
-            let newProducts = {};
-            const configIdKit = Object.keys(kit.products).map(c => parseInt(c));
-            // console.log("e")
+        api.get(`enterprises/${ID_ENTERPRISE}/products?filter={"include":["configurations"]}`)
+            .then((response) => {
+                let newProducts = {};
+                const configIdKit = Object.keys(kit.products).map(c => parseInt(c));
+                // console.log("e")
 
-            //Serve para verificar se alguma configuraçao do kit é igual a essa
-            response.data.map((product) => {
-                let newConfiguration = {};
+                //Serve para verificar se alguma configuraçao do kit é igual a essa
+                response.data.map((product) => {
+                    let newConfiguration = {};
 
-                let quantity = 1;
-                product.configurations.map((configuration, index) => {
-                    if (!!kit?.products[configuration.id]) {
-                        quantity = kit.products[configuration.id].quantity;
-                        newConfiguration[configuration.id] = { ...configuration, usage: true }
-                    } else {
-                        newConfiguration[configuration.id] = { ...configuration, usage: index === 0 }
-                    }
+                    let quantity = 1;
+                    product.configurations.map((configuration, index) => {
+                        if (!!kit?.products[configuration.id]) {
+                            quantity = kit.products[configuration.id].quantity;
+                            newConfiguration[configuration.id] = { ...configuration, usage: true }
+                        } else {
+                            newConfiguration[configuration.id] = { ...configuration, usage: index === 0 }
+                        }
+                    });
+
+                    //Somente devo adicionar em newProducts se caso alguma das configurações dele estiver
+                    //no kit
+                    let hasInKit = false;
+                    const identifiersConfig = Object.keys(newConfiguration).map(c => parseInt(c));
+
+                    identifiersConfig.forEach((id) => {
+                        configIdKit.forEach((idKit) => {
+                            if (id === idKit)
+                                hasInKit = true;
+                        })
+                    })
+
+                    if (hasInKit)
+                        newProducts[product.id] = { ...product, configurations: newConfiguration, quantity };
                 });
 
-                //Somente devo adicionar em newProducts se caso alguma das configurações dele estiver
-                //no kit
-                let hasInKit = false;
-                const identifiersConfig = Object.keys(newConfiguration).map(c => parseInt(c));
-
-                identifiersConfig.forEach((id) => {
-                    configIdKit.forEach((idKit) => {
-                        if (id === idKit)
-                            hasInKit = true;
-                    })
-                })
-
-                if (hasInKit)
-                    newProducts[product.id] = { ...product, configurations: newConfiguration, quantity };
+                setProducts(newProducts);
+            }).catch((error) => {
+                console.log(error);
             });
 
-            setProducts(newProducts);
-        }).catch((error) => {
-            console.log(error);
-        });
-
-        api.get('/services').then((response) => {
+        api.get(`/enterprises/${ID_ENTERPRISE}/services`).then((response) => {
             setServices(response.data);
         }).catch((error) => {
             console.log(error);
         });
 
-        api.get('/dependencies?filter={"include":["configuration"]}').then((response) => {
-            setDependencies(response.data);
-        }).catch((error) => {
-            console.log(error);
-        });
+        api.get(`enterprises/${ID_ENTERPRISE}/dependencies?filter={"include":["configuration"]}`)
+            .then((response) => {
+                setDependencies(response.data);
+            }).catch((error) => {
+                console.log(error);
+            });
 
-        api.get('/budgets/6488a4bd2c72573d1ba98b77').then((response) => {
-            budgetId = response.data.quantity_budget;
+        api.get(`/enterprises/${ID_ENTERPRISE}/budget`).then((response) => {
+            budgetId = response.data.budget;
         }).catch((error) => {
             console.log(error);
         });

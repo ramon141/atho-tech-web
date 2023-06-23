@@ -20,11 +20,11 @@ export default function ListItems() {
         </ListItemButton>
       </ListItem>
 
-      <ListItem>
+      {/* <ListItem>
         <ListItemButton onClick={() => navigate("/calculate")}>
           <ListItemText primary={"Calculadora"} />
         </ListItemButton>
-      </ListItem>
+      </ListItem> */}
 
       {ROLE === "Admin" ? (
         <>

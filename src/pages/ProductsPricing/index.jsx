@@ -2,7 +2,7 @@ import { Card, CardContent, Grid, Button, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import { ROLE } from "../../services/auth";
+import { ID_ENTERPRISE, ROLE } from "../../services/auth";
 import Item from "./Item";
 
 const classes = {
@@ -32,7 +32,7 @@ export default function ProductsPricing() {
         value: parseFloat(configuration.value),
       };
 
-      api.patch(`configurations/${configuration.id}`, data);
+      api.patch(`/configurations/${configuration.id}`, data);
     }
   };
 
@@ -94,7 +94,7 @@ export default function ProductsPricing() {
       product.configurations.forEach((configuration) => {
         const value = configuration.value;
         const valueFormated = value.toFixed(2);
-        
+
         newConfigurations.push({
           ...configuration,
           value: valueFormated,

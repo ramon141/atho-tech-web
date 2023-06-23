@@ -9,6 +9,7 @@ export const login = (response) => {
     localStorage.setItem('role', response.role);
     localStorage.setItem('name', response.name);
     localStorage.setItem('email', response.email);
+    localStorage.setItem('id_enterprise', response.enterpriseId);
 };
 
 export const logout = () => {
@@ -19,3 +20,4 @@ export const logout = () => {
 export const ROLE = localStorage.getItem('role');
 export const NAME = localStorage.getItem('name');
 export const E_MAIL = localStorage.getItem('email');
+export const ID_ENTERPRISE = localStorage.getItem('id_enterprise');

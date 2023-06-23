@@ -12,7 +12,7 @@ import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import imgBackground from "../../assets/background.png";
 import { FaUnlock as LockIcon } from "react-icons/fa";
-import { login as addEnvVarsFromRequestLogin } from "../../services/auth";
+import { ID_ENTERPRISE, login as addEnvVarsFromRequestLogin } from "../../services/auth";
 
 const classes = {
   root: { margin: 30 },
@@ -40,7 +40,9 @@ export default function RegisterSeller() {
       password,
       name: username,
       role: "Vendedor",
+      enterpriseId: ID_ENTERPRISE
     };
+
     api
       .post("signup", data)
       .then((response) => {
@@ -50,7 +52,7 @@ export default function RegisterSeller() {
       .catch((error) => {
         alert(
           error?.response?.data?.error?.message ||
-            "Um erro desconhecido ocorreu"
+          "Um erro desconhecido ocorreu"
         );
       });
   };

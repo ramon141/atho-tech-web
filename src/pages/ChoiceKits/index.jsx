@@ -6,6 +6,7 @@ import imgIcon from '../../assets/icon.png';
 import {
   AiFillCamera as CameraIcon
 } from 'react-icons/ai';
+import { ID_ENTERPRISE } from '../../services/auth';
 
 const classes = {
   root: { margin: 20 },
@@ -30,7 +31,7 @@ export default function ChoiceKits() {
   const [kits, setKits] = useState([]);
 
   useEffect(() => {
-    api.get('/kits').then((response) => {
+    api.get(`/enterprises/${ID_ENTERPRISE}/kits`).then((response) => {
       setKits(response.data);
     }).catch((error) => {
       alert('O sistema apresentou uma falha. Saia do sistema e faça login novamente');

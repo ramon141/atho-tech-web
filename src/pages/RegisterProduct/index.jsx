@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import api from "../../services/api";
+import { ID_ENTERPRISE } from "../../services/auth";
 
 const classes = {
   root: { margin: 30 },
@@ -31,16 +32,17 @@ export default function RegisterProduct() {
 
   const register = async () => {
     try {
-      const dataProducts = { description };
-      const { data: product } = await api.post("products", dataProducts);
+      const dataProducts = { description, enterpriseId: ID_ENTERPRISE };
+      const { data: product } = await api.post(`/enterprises/${ID_ENTERPRISE}/products`, dataProducts);
 
       const dataConfig = {
         description: " ",
         productsId: product.id,
         value: parseFloat(value),
+        enterpriseId: ID_ENTERPRISE
       };
 
-      await api.post("configurations", dataConfig);
+      await api.post(`/enterprises/${ID_ENTERPRISE}/configurations`, dataConfig);
 
       cleanFields();
       alert("Produto cadastrado com sucesso!");
