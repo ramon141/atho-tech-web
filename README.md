@@ -17,7 +17,6 @@ Dentro arquivo `.env` deverá conter a(s) seguinte(s) variável(is), abaixo de c
     + Ambiente de desenvolvimento - `https://localhost:3001/`
 
 + PORT
-    + Por enquanto, essa configuração ainda não está funcionando.
     + Essa variável indicar em qual porta o container será aberto.
     + Qualquer valor numérico pode ser utilizado, geramente a porta do react, usando o vite, é `5173`.
 
